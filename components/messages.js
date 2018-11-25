@@ -1,76 +1,47 @@
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 import ErrorMessage from "./errorMessage";
+import moment from "moment";
+import { List, Image } from "semantic-ui-react";
 
 export const allMessages = gql`
   {
-    messages {
+    messages(offset: 0, limit: 10) {
       id
       content
+      createdAt
+      username
     }
   }
 `;
 
 export default function Messages() {
   return (
-    <Query query={allMessages}>
+    <Query query={allMessages} fetchPolicy="cache-and-network">
       {({ loading, error, data: { messages } }) => {
         if (error) return <ErrorMessage message="Error loading messages." />;
         if (loading) return <div>Loading</div>;
 
         return (
-          <section>
-            <ul>
-              {messages.map(message => (
-                <li key={message.id}>
-                  <div>
-                    <span>{message.content}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <style jsx>{`
-              section {
-                padding-bottom: 20px;
-              }
-              li {
-                display: block;
-                margin-bottom: 10px;
-              }
-              div {
-                align-items: center;
-                display: flex;
-              }
-              a {
-                font-size: 14px;
-                margin-right: 10px;
-                text-decoration: none;
-                padding-bottom: 0;
-                border: 0;
-              }
-              span {
-                font-size: 14px;
-                margin-right: 5px;
-              }
-              ul {
-                margin: 0;
-                padding: 0;
-              }
-              button:before {
-                align-self: center;
-                border-style: solid;
-                border-width: 6px 4px 0 4px;
-                border-color: #ffffff transparent transparent transparent;
-                content: "";
-                height: 0;
-                margin-right: 5px;
-                width: 0;
-              }
-            `}</style>
-          </section>
+          <List>
+            {messages.map(message => (
+              <List.Item key={message.id}>
+                <Image avatar src="/static/user.png" />
+                <List.Content>
+                  <List.Header as="a">
+                    Anonymous {fromNow(message.createdAt)}
+                  </List.Header>
+                  <List.Description>{message.content}</List.Description>
+                </List.Content>
+              </List.Item>
+            ))}
+          </List>
         );
       }}
     </Query>
   );
+}
+
+function fromNow(time) {
+  return <span>{moment(Number(time)).fromNow()}</span>;
 }

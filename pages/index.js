@@ -20,15 +20,9 @@ export default () => (
       </Container>
     </Menu>
 
-    <Container text style={{ marginTop: "6em" }}>
+    <Container text style={{ paddingTop: "6em" }}>
       <Header as="h1">Chat App</Header>
       <Messages />
     </Container>
-
-    <Segment
-      inverted
-      vertical
-      style={{ margin: "5em 0em 0em", padding: "5em 0em" }}
-    />
   </App>
 );

@@ -10,13 +10,14 @@ const typeDefs = gql`
     username: String
   }
   type Query {
-    messages: [Message]
+    messages(offset: Int, limit: Int): [Message]
   }
 `;
 
 const resolvers = {
   Query: {
-    messages: () => service.getMessages()
+    messages: (parentValue, { offset, limit }) =>
+      service.getMessages(offset, limit)
   }
 };
 

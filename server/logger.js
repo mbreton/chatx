@@ -6,7 +6,7 @@ const logFormat = printf(info => {
 });
 
 const logger = createLogger({
-  format: combine(timestamp(), logFormat),
+  format: combine(logFormat),
   transports: [
     new transports.Console({
       format: format.simple(),
