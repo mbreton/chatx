@@ -19,5 +19,13 @@ module.exports = {
     return onReady.then(() =>
       Message.all({ offset, limit, order: [["createdAt", "ASC"]] })
     );
+  },
+  addNewMessage(content, username) {
+    return onReady.then(() =>
+      Message.create({
+        content,
+        username
+      })
+    );
   }
 };
