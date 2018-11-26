@@ -60,7 +60,7 @@ storiesOf("Header", module)
   .add("simple", () => <Header />)
   .add("With two rooms", () => (
     <Header
-      roomId={2}
+      roomId={"2"}
       rooms={[{ id: 1, name: "Room1" }, { id: 2, name: "Room2" }]}
     />
   ));

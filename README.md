@@ -62,6 +62,8 @@ But also :
 - [Winston](https://github.com/winstonjs/winston)
 - [Semantic UI React](https://react.semantic-ui.com/)
 - [Storybook](https://storybook.js.org)
+- [StoryShots](https://github.com/storybooks/storybook/tree/master/addons/storyshots/storyshots-core)
+- [Jest](https://jestjs.io)
 
 ### Environment variables
 
@@ -112,4 +114,10 @@ To start the Storybook
 
 ```
 npm run storybook
+```
+
+To run Unit Test on React component
+
+```
+npm test
 ```

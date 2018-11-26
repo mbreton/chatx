@@ -1,0 +1,489 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Header With two rooms 1`] = `
+<div
+  className="ui inverted pointing menu"
+>
+  <a
+    className="header item"
+    onClick={[Function]}
+  >
+    <img
+      className="ui mini image"
+      src="/static/logo.png"
+      style={
+        Object {
+          "marginRight": "1.5em",
+        }
+      }
+    />
+  </a>
+  <a
+    className="item"
+    href="/index?roomId=1"
+    onClick={[Function]}
+  >
+    Room1
+  </a>
+  <a
+    className="item"
+    href="/index?roomId=2"
+    onClick={[Function]}
+  >
+    Room2
+  </a>
+</div>
+`;
+
+exports[`Storyshots Header simple 1`] = `
+<div
+  className="ui inverted pointing menu"
+>
+  <a
+    className="header item"
+    onClick={[Function]}
+  >
+    <img
+      className="ui mini image"
+      src="/static/logo.png"
+      style={
+        Object {
+          "marginRight": "1.5em",
+        }
+      }
+    />
+  </a>
+</div>
+`;
+
+exports[`Storyshots MessageInput Bubble send event 1`] = `
+<div
+  className="ui inverted segment"
+>
+  <div
+    className="ui grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="three wide column"
+      >
+        <div
+          className="ui fluid input"
+        >
+          <input
+            onChange={[Function]}
+            placeholder="Your Name"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="eleven wide column"
+      >
+        <div
+          className="ui fluid input"
+        >
+          <input
+            onChange={[Function]}
+            placeholder="Send a message"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="two wide column"
+      >
+        <button
+          className="ui fluid primary disabled button"
+          disabled={true}
+          onClick={[Function]}
+          role="button"
+          tabIndex={-1}
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots MessageInput With a defined content and author 1`] = `
+<div
+  className="ui inverted segment"
+>
+  <div
+    className="ui grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="three wide column"
+      >
+        <div
+          className="ui fluid input"
+        >
+          <input
+            onChange={[Function]}
+            placeholder="Your Name"
+            type="text"
+            value="Mathieu"
+          />
+        </div>
+      </div>
+      <div
+        className="eleven wide column"
+      >
+        <div
+          className="ui fluid input"
+        >
+          <input
+            onChange={[Function]}
+            placeholder="Send a message"
+            type="text"
+            value="Hello hello 👍"
+          />
+        </div>
+      </div>
+      <div
+        className="two wide column"
+      >
+        <button
+          className="ui fluid primary button"
+          onClick={[Function]}
+          role="button"
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots MessageInput simple 1`] = `
+<div
+  className="ui inverted segment"
+>
+  <div
+    className="ui grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="three wide column"
+      >
+        <div
+          className="ui fluid input"
+        >
+          <input
+            onChange={[Function]}
+            placeholder="Your Name"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="eleven wide column"
+      >
+        <div
+          className="ui fluid input"
+        >
+          <input
+            onChange={[Function]}
+            placeholder="Send a message"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="two wide column"
+      >
+        <button
+          className="ui fluid primary disabled button"
+          disabled={true}
+          onClick={[Function]}
+          role="button"
+          tabIndex={-1}
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots MessageInput while loading 1`] = `
+<div
+  className="ui inverted segment"
+>
+  <div
+    className="ui grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="three wide column"
+      >
+        <div
+          className="ui disabled fluid input"
+        >
+          <input
+            disabled={true}
+            onChange={[Function]}
+            placeholder="Your Name"
+            tabIndex={-1}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="eleven wide column"
+      >
+        <div
+          className="ui disabled fluid input"
+        >
+          <input
+            disabled={true}
+            onChange={[Function]}
+            placeholder="Send a message"
+            tabIndex={-1}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        className="two wide column"
+      >
+        <button
+          className="ui fluid loading primary disabled button"
+          disabled={true}
+          onClick={[Function]}
+          role="button"
+          tabIndex={-1}
+        >
+          Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Messages simple 1`] = `
+<div
+  className="ui segment messages-container"
+  style={
+    Object {
+      "minHeight": "10rem",
+      "overflowY": "auto",
+    }
+  }
+>
+  <div
+    className="ui icon center aligned header"
+  >
+    <i
+      aria-hidden="true"
+      className="talk huge icon"
+    />
+    Nobody speak yet. Be the first !
+  </div>
+</div>
+`;
+
+exports[`Storyshots Messages while loading 1`] = `
+<div
+  className="ui loading segment messages-container"
+  style={
+    Object {
+      "minHeight": "10rem",
+      "overflowY": "auto",
+    }
+  }
+>
+  <div
+    className="ui icon center aligned header"
+  >
+    <i
+      aria-hidden="true"
+      className="talk huge icon"
+    />
+    Nobody speak yet. Be the first !
+  </div>
+</div>
+`;
+
+exports[`Storyshots Messages with few messages 1`] = `
+<div
+  className="ui placeholder segment messages-container"
+  style={
+    Object {
+      "minHeight": "10rem",
+      "overflowY": "auto",
+    }
+  }
+>
+  <div
+    className="ui list"
+    role="list"
+  >
+    <div
+      className="item"
+      onClick={[Function]}
+      role="listitem"
+    >
+      <div
+        className="content"
+      >
+        <div
+          className="header"
+        >
+          <a
+            className="ui teal image label"
+            onClick={[Function]}
+          >
+            <img
+              src="/static/user.png"
+            />
+            Foo
+          </a>
+          <div
+            className="ui tag label"
+            onClick={[Function]}
+          >
+            <span>
+              2 days ago
+            </span>
+          </div>
+        </div>
+        <div
+          className="description"
+        >
+          Hello
+        </div>
+      </div>
+    </div>
+    <div
+      className="item"
+      onClick={[Function]}
+      role="listitem"
+    >
+      <div
+        className="content"
+      >
+        <div
+          className="header"
+        >
+          <a
+            className="ui teal image label"
+            onClick={[Function]}
+          >
+            <img
+              src="/static/user.png"
+            />
+            Bar
+          </a>
+          <div
+            className="ui tag label"
+            onClick={[Function]}
+          >
+            <span>
+              a day ago
+            </span>
+          </div>
+        </div>
+        <div
+          className="description"
+        >
+          Bonjour
+        </div>
+      </div>
+    </div>
+    <div
+      className="item"
+      onClick={[Function]}
+      role="listitem"
+    >
+      <div
+        className="content"
+      >
+        <div
+          className="header"
+        >
+          <a
+            className="ui teal image label"
+            onClick={[Function]}
+          >
+            <img
+              src="/static/user.png"
+            />
+            Qix
+          </a>
+          <div
+            className="ui tag label"
+            onClick={[Function]}
+          >
+            <span>
+              an hour ago
+            </span>
+          </div>
+        </div>
+        <div
+          className="description"
+        >
+          Demat
+        </div>
+      </div>
+    </div>
+    <div
+      className="item"
+      onClick={[Function]}
+      role="listitem"
+    >
+      <div
+        className="content"
+      >
+        <div
+          className="header"
+        >
+          <a
+            className="ui teal image label"
+            onClick={[Function]}
+          >
+            <img
+              src="/static/user.png"
+            />
+            Foo
+          </a>
+          <div
+            className="ui tag label"
+            onClick={[Function]}
+          >
+            <span>
+              a few seconds ago
+            </span>
+          </div>
+        </div>
+        <div
+          className="description"
+        >
+          ní zǎo
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
