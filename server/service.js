@@ -2,7 +2,20 @@ const Sequelize = require("sequelize");
 const Logger = require("./logger");
 const env = require("./env");
 
-const sequelize = new Sequelize(env.POSTGRES_URI);
+const sequelize = new Sequelize({
+  host: env.POSTGRES_HOST,
+  database: env.POSTGRES_DATABASE,
+  username: env.POSTGRES_USER,
+  password: env.POSTGRES_PASSWORD,
+  dialect: "postgres",
+  timezone: "+01:00",
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
+});
 const { Message } = require("./model")(sequelize);
 
 const onReady = sequelize
@@ -17,15 +30,17 @@ const onReady = sequelize
 module.exports = {
   getMessages(offset, limit) {
     return onReady.then(() =>
-      Message.all({ offset, limit, order: [["createdAt", "ASC"]] })
+      Message.all({ offset, limit, order: [["createdAt", "DESC"]] })
     );
   },
   addNewMessage(content, username) {
-    return onReady.then(() =>
-      Message.create({
-        content,
-        username
-      })
-    );
+    return onReady
+      .then(() =>
+        Message.create({
+          content,
+          username
+        })
+      )
+      .then(resp => resp.dataValues);
   }
 };
