@@ -5,6 +5,7 @@ import { action } from "@storybook/addon-actions";
 
 import MessageInput from "../components/input-message/component";
 import Messages from "../components/messages/component";
+import Header from "../components/header/component";
 import moment from "moment";
 
 storiesOf("MessageInput", module)
@@ -24,7 +25,7 @@ storiesOf("Messages", module)
         {
           id: 1,
           content: "Hello",
-          username: "Foo",
+          author: "Foo",
           createdAt: moment()
             .subtract(2, "days")
             .valueOf()
@@ -32,7 +33,7 @@ storiesOf("Messages", module)
         {
           id: 2,
           content: "Bonjour",
-          username: "Bar",
+          author: "Bar",
           createdAt: moment()
             .subtract(1, "days")
             .valueOf()
@@ -40,7 +41,7 @@ storiesOf("Messages", module)
         {
           id: 3,
           content: "Demat",
-          username: "Qix",
+          author: "Qix",
           createdAt: moment()
             .subtract(1, "hours")
             .valueOf()
@@ -48,9 +49,19 @@ storiesOf("Messages", module)
         {
           id: 4,
           content: "ní zǎo",
-          username: "Foo",
+          author: "Foo",
           createdAt: new Date().getTime()
         }
       ]}
+    />
+  ));
+
+storiesOf("Header", module)
+  .add("simple", () => <Header />)
+  .add("With one room", () => <Header rooms={[{ id: 1, name: "Room1" }]} />)
+  .add("With two rooms", () => (
+    <Header
+      selectedRoomId={2}
+      rooms={[{ id: 1, name: "Room1" }, { id: 2, name: "Room2" }]}
     />
   ));

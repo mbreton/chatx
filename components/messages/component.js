@@ -46,7 +46,7 @@ class MessagesComponent extends PureComponent {
                     <List.Header>
                       <Label as="a" image color="teal">
                         <img src="/static/user.png" />
-                        {message.username}
+                        {message.author}
                       </Label>
                       <Label tag>{this.fromNow(message.createdAt)}</Label>
                     </List.Header>
@@ -56,7 +56,7 @@ class MessagesComponent extends PureComponent {
               ))}
           </List>
         ) : (
-          <Header icon>
+          <Header icon textAlign="center">
             <Icon name="talk" size="huge" />
             Nobody speak yet. Be the first !
           </Header>

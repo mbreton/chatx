@@ -5,11 +5,11 @@ import Messages from "./component";
 
 export const ALL_MESSAGES = gql`
   {
-    messages(offset: 0, limit: 20) {
+    messages(roomId: 1, offset: 0, limit: 20) {
       id
       content
       createdAt
-      username
+      author
     }
   }
 `;
@@ -19,7 +19,7 @@ const MESSAGE_SUBSCRIPTION = gql`
     messageAdded {
       id
       content
-      username
+      author
       createdAt
     }
   }
@@ -40,7 +40,6 @@ export default function MessagesApolloContainer() {
                 updateQuery: (prevProps, { subscriptionData }) => {
                   if (!subscriptionData.data) return prevProps;
                   const newMessage = subscriptionData.data.messageAdded;
-                  console.log(prevProps.messages, newMessage);
                   return Object.assign({}, prevProps, {
                     messages: [newMessage, ...prevProps.messages]
                   });

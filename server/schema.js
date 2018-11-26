@@ -1,35 +1,47 @@
-const { gql /*, PubSub*/ } = require("apollo-server");
+const { gql } = require("apollo-server");
 const service = require("./service");
 const { PubSub } = require("graphql-subscriptions");
 const pubsub = new PubSub();
+
+const MESSAGE_ADDED = "messageAdded";
 
 const typeDefs = gql`
   type Subscription {
     messageAdded: Message
   }
+  type Room {
+    id: ID!
+    name: String!
+    messages: [Message]
+  }
   type Message {
-    id: Int!
+    id: ID!
     content: String!
     createdAt: String!
     updatedAt: String!
-    username: String!
+    author: String!
   }
   type Query {
-    messages(offset: Int, limit: Int): [Message]
+    rooms: [Room]
+    messages(roomId: ID!, offset: Int, limit: Int): [Message]
   }
   type Mutation {
-    sendMessage(content: String!, username: String!): Message
+    sendMessage(roomId: ID!, content: String!, author: String!): Message
   }
 `;
 
-const MESSAGE_ADDED = "messageAdded";
 const resolvers = {
   Query: {
-    messages: (_, { offset, limit }) => service.getMessages(offset, limit)
+    messages(_, messageReq) {
+      return service.getMessages(messageReq);
+    },
+    rooms() {
+      return service.getRooms();
+    }
   },
   Mutation: {
-    sendMessage: (_, { content, username }) => {
-      return service.addNewMessage(content, username).then(message => {
+    sendMessage(_, newMessage) {
+      return service.addNewMessage(newMessage).then(message => {
         pubsub.publish(MESSAGE_ADDED, { messageAdded: message });
         return message;
       });
@@ -38,6 +50,11 @@ const resolvers = {
   Subscription: {
     messageAdded: {
       subscribe: () => pubsub.asyncIterator([MESSAGE_ADDED])
+    }
+  },
+  Room: {
+    messages(room) {
+      return service.getMessages({ roomId: room.id });
     }
   }
 };

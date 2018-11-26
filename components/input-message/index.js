@@ -3,19 +3,19 @@ import gql from "graphql-tag";
 import InputMessage from "./component";
 
 export const sendMessage = gql`
-  mutation SendMessage($content: String!, $username: String!) {
-    sendMessage(content: $content, username: $username) {
+  mutation SendMessage($roomId: ID!, $content: String!, $author: String!) {
+    sendMessage(roomId: $roomId, content: $content, author: $author) {
       id
       content
       createdAt
-      username
+      author
     }
   }
 `;
 
 export default function MessagesApolloContainer() {
   const onSendHandler = mutation => ({ content, author }) => {
-    mutation({ variables: { content: content, username: author } });
+    mutation({ variables: { roomId: 1, content, author } });
   };
   return (
     <Mutation mutation={sendMessage}>

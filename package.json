@@ -4,6 +4,7 @@
   "author": "Mathieu Breton <mathieubre@gmail.com>",
   "license": "ISC",
   "scripts": {
+    "seed": "node db/seed",
     "dev": "node server",
     "build": "next build",
     "start": "next start",
