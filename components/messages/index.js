@@ -1,11 +1,11 @@
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-import ErrorMessage from "../errorMessage";
+import ErrorMessage from "./errorMessage";
 import Messages from "./component";
 
-export const allMessages = gql`
+export const ALL_MESSAGES = gql`
   {
-    messages(offset: 0, limit: 10) {
+    messages(offset: 0, limit: 20) {
       id
       content
       createdAt
@@ -14,13 +14,41 @@ export const allMessages = gql`
   }
 `;
 
+const MESSAGE_SUBSCRIPTION = gql`
+  subscription onNewMessage {
+    messageAdded {
+      id
+      content
+      username
+      createdAt
+    }
+  }
+`;
+
 export default function MessagesApolloContainer() {
   return (
-    <Query query={allMessages} fetchPolicy="cache-and-network">
-      {({ loading, error, data: { messages } }) => {
+    <Query query={ALL_MESSAGES} fetchPolicy="cache-and-network">
+      {({ error, data: { messages }, fetchLoading, subscribeToMore }) => {
         if (error) return <ErrorMessage message="Error loading messages." />;
-        if (loading) return <div>Loading</div>;
-        return <Messages messages={messages} />;
+        return (
+          <Messages
+            messages={messages}
+            loading={fetchLoading}
+            subscribeToNewMessages={() => {
+              subscribeToMore({
+                document: MESSAGE_SUBSCRIPTION,
+                updateQuery: (prevProps, { subscriptionData }) => {
+                  if (!subscriptionData.data) return prevProps;
+                  const newMessage = subscriptionData.data.messageAdded;
+                  console.log(prevProps.messages, newMessage);
+                  return Object.assign({}, prevProps, {
+                    messages: [newMessage, ...prevProps.messages]
+                  });
+                }
+              });
+            }}
+          />
+        );
       }}
     </Query>
   );

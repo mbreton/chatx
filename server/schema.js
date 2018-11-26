@@ -1,7 +1,12 @@
-const { gql } = require("apollo-server");
+const { gql /*, PubSub*/ } = require("apollo-server");
 const service = require("./service");
+const { PubSub } = require("graphql-subscriptions");
+const pubsub = new PubSub();
 
 const typeDefs = gql`
+  type Subscription {
+    messageAdded: Message
+  }
   type Message {
     id: Int!
     content: String!
@@ -17,14 +22,22 @@ const typeDefs = gql`
   }
 `;
 
+const MESSAGE_ADDED = "messageAdded";
 const resolvers = {
   Query: {
-    messages: (parentValue, { offset, limit }) =>
-      service.getMessages(offset, limit)
+    messages: (_, { offset, limit }) => service.getMessages(offset, limit)
   },
   Mutation: {
-    sendMessage: (parent, { content, username }) => {
-      return service.addNewMessage(content, username);
+    sendMessage: (_, { content, username }) => {
+      return service.addNewMessage(content, username).then(message => {
+        pubsub.publish(MESSAGE_ADDED, { messageAdded: message });
+        return message;
+      });
+    }
+  },
+  Subscription: {
+    messageAdded: {
+      subscribe: () => pubsub.asyncIterator([MESSAGE_ADDED])
     }
   }
 };

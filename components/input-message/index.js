@@ -14,8 +14,8 @@ export const sendMessage = gql`
 `;
 
 export default function MessagesApolloContainer() {
-  const onSendHandler = mutation => message => {
-    mutation({ variables: { content: message, username: "anonymous" } });
+  const onSendHandler = mutation => ({ content, author }) => {
+    mutation({ variables: { content: content, username: author } });
   };
   return (
     <Mutation mutation={sendMessage}>
