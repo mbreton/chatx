@@ -1,6 +1,7 @@
 import { Mutation } from "react-apollo";
 import gql from "graphql-tag";
 import InputMessage from "./component";
+import PropTypes from "prop-types";
 
 export const sendMessage = gql`
   mutation SendMessage($roomId: ID!, $content: String!, $author: String!) {
@@ -13,9 +14,9 @@ export const sendMessage = gql`
   }
 `;
 
-export default function MessagesApolloContainer() {
+function InputMessageApolloContainer({ roomId }) {
   const onSendHandler = mutation => ({ content, author }) => {
-    mutation({ variables: { roomId: 1, content, author } });
+    mutation({ variables: { roomId, content, author } });
   };
   return (
     <Mutation mutation={sendMessage}>
@@ -28,3 +29,9 @@ export default function MessagesApolloContainer() {
     </Mutation>
   );
 }
+
+InputMessageApolloContainer.propTypes = {
+  roomId: PropTypes.string
+};
+
+export default InputMessageApolloContainer;

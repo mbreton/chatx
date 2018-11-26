@@ -4,17 +4,6 @@ import PropTypes from "prop-types";
 import { List, Label, Segment, Header, Icon } from "semantic-ui-react";
 
 class MessagesComponent extends PureComponent {
-  static propTypes = {
-    messages: PropTypes.array,
-    loading: PropTypes.bool,
-    subscribeToNewMessages: PropTypes.func
-  };
-
-  static defaultProps = {
-    loading: false,
-    message: []
-  };
-
   componentDidMount() {
     this.props.subscribeToNewMessages && this.props.subscribeToNewMessages();
   }
@@ -65,5 +54,16 @@ class MessagesComponent extends PureComponent {
     );
   }
 }
+
+MessagesComponent.propTypes = {
+  messages: PropTypes.array,
+  loading: PropTypes.bool,
+  subscribeToNewMessages: PropTypes.func
+};
+
+MessagesComponent.defaultProps = {
+  loading: false,
+  message: []
+};
 
 export default MessagesComponent;

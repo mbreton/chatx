@@ -1,13 +1,12 @@
-const { gql } = require("apollo-server");
+const { gql, PubSub, withFilter } = require("apollo-server");
 const service = require("./service");
-const { PubSub } = require("graphql-subscriptions");
 const pubsub = new PubSub();
 
 const MESSAGE_ADDED = "messageAdded";
 
 const typeDefs = gql`
   type Subscription {
-    messageAdded: Message
+    messageAdded(roomId: ID!): Message
   }
   type Room {
     id: ID!
@@ -20,6 +19,7 @@ const typeDefs = gql`
     createdAt: String!
     updatedAt: String!
     author: String!
+    roomId: ID!
   }
   type Query {
     rooms: [Room]
@@ -49,7 +49,14 @@ const resolvers = {
   },
   Subscription: {
     messageAdded: {
-      subscribe: () => pubsub.asyncIterator([MESSAGE_ADDED])
+      async subscribe(rootValue, args, context) {
+        return withFilter(
+          () => pubsub.asyncIterator(MESSAGE_ADDED),
+          (payload, variables) => {
+            return payload.messageAdded.roomId === Number(variables.roomId);
+          }
+        )(rootValue, args, context);
+      }
     }
   },
   Room: {

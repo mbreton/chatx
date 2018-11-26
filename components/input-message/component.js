@@ -3,24 +3,11 @@ import { Input, Segment, Button, Grid } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 class InputMessage extends Component {
-  static propTypes = {
-    onSend: PropTypes.func,
-    content: PropTypes.string,
-    author: PropTypes.string,
-    loading: PropTypes.bool
-  };
-
-  static defaultProps = {
-    onSend: () => {},
-    content: "",
-    author: ""
-  };
-
-  constructor(props) {
-    super(props);
+  constructor() {
+    super(...arguments);
     this.state = {
-      content: props.content,
-      author: props.author
+      content: this.props.content,
+      author: this.props.author
     };
     this.onButtonClick = this.onButtonClick.bind(this);
     this.onContentInputChange = this.onContentInputChange.bind(this);
@@ -83,5 +70,18 @@ class InputMessage extends Component {
     );
   }
 }
+
+InputMessage.propTypes = {
+  onSend: PropTypes.func,
+  content: PropTypes.string,
+  author: PropTypes.string,
+  loading: PropTypes.bool
+};
+
+InputMessage.defaultProps = {
+  onSend: () => {},
+  content: "",
+  author: ""
+};
 
 export default InputMessage;

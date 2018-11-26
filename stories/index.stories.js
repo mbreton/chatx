@@ -58,10 +58,9 @@ storiesOf("Messages", module)
 
 storiesOf("Header", module)
   .add("simple", () => <Header />)
-  .add("With one room", () => <Header rooms={[{ id: 1, name: "Room1" }]} />)
   .add("With two rooms", () => (
     <Header
-      selectedRoomId={2}
+      roomId={2}
       rooms={[{ id: 1, name: "Room1" }, { id: 2, name: "Room2" }]}
     />
   ));
